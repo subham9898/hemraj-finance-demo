@@ -48,26 +48,36 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
     {
       field: 'name',
       headerName: 'Debtor / Company Name',
-      flex: 1.4,
-      minWidth: 200,
+      flex: 1.8,
+      minWidth: 280,
       renderCell: (params) => (
-        <Box sx={{ py: 1 }}>
-          <Typography variant="body2" color="text.primary" sx={{ fontWeight: 700 }}>
+        <Stack spacing={0.2} sx={{ justifyContent: 'center', height: '100%', width: '100%', overflow: 'hidden' }}>
+          <Typography
+            variant="body2"
+            color="text.primary"
+            noWrap
+            sx={{ fontWeight: 700, lineHeight: 1.3, fontSize: '0.875rem' }}
+          >
             {params.row.name}
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            noWrap
+            sx={{ lineHeight: 1.2, fontSize: '0.75rem' }}
+          >
             {params.row.companyCode} • {params.row.contactName}
           </Typography>
-        </Box>
+        </Stack>
       ),
     },
     {
       field: 'region',
       headerName: 'Region',
-      flex: 0.8,
-      minWidth: 120,
+      flex: 1,
+      minWidth: 150,
       renderCell: (params) => (
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" noWrap sx={{ fontSize: '0.85rem' }}>
           {params.value}
         </Typography>
       ),
@@ -75,8 +85,8 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
     {
       field: 'totalOutstanding',
       headerName: 'Total Outstanding',
-      flex: 1,
-      minWidth: 140,
+      flex: 1.1,
+      minWidth: 150,
       renderCell: (params) => (
         <MonoText variant="body2" sx={{ fontWeight: 700, color: '#111827' }}>
           {formatCurrency(params.value, 'full')}
@@ -87,7 +97,7 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       field: 'd30',
       headerName: '1-30 Days',
       flex: 0.8,
-      minWidth: 100,
+      minWidth: 105,
       renderCell: (params) => (
         <MonoText variant="body2" color={params.value > 0 ? '#d97706' : 'text.secondary'}>
           {params.value > 0 ? formatCurrency(params.value, 'short') : '—'}
@@ -98,7 +108,7 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       field: 'd60',
       headerName: '31-60 Days',
       flex: 0.8,
-      minWidth: 100,
+      minWidth: 105,
       renderCell: (params) => (
         <MonoText variant="body2" color={params.value > 0 ? '#ea580c' : 'text.secondary'}>
           {params.value > 0 ? formatCurrency(params.value, 'short') : '—'}
@@ -109,7 +119,7 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       field: 'd90Plus',
       headerName: '90+ Days',
       flex: 0.8,
-      minWidth: 100,
+      minWidth: 105,
       renderCell: (params) => (
         <MonoText variant="body2" sx={{ fontWeight: params.value > 0 ? 700 : 400, color: params.value > 0 ? '#dc2626' : 'text.secondary' }}>
           {params.value > 0 ? formatCurrency(params.value, 'short') : '—'}
@@ -120,14 +130,14 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       field: 'riskLevel',
       headerName: 'Risk Level',
       flex: 1,
-      minWidth: 130,
+      minWidth: 140,
       renderCell: (params) => <RiskBadge riskLevel={params.value as RiskLevel} />,
     },
     {
       field: 'avgPaymentDelayDays',
       headerName: 'Avg Delay',
-      flex: 0.7,
-      minWidth: 90,
+      flex: 0.8,
+      minWidth: 100,
       renderCell: (params) => (
         <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
           {params.value} days
@@ -138,7 +148,7 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       field: 'actions',
       headerName: 'Actions',
       flex: 1.2,
-      minWidth: 170,
+      minWidth: 180,
       sortable: false,
       renderCell: (params) => (
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
@@ -151,7 +161,7 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
               e.stopPropagation();
               onDraftEmail(params.row);
             }}
-            sx={{ fontSize: '0.72rem', py: 0.4, px: 1 }}
+            sx={{ fontSize: '0.72rem', py: 0.5, px: 1.2, textTransform: 'none', whiteSpace: 'nowrap' }}
           >
             Draft AI Email
           </Button>
@@ -177,11 +187,11 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       {/* Search & Filters Header */}
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ justifyContent: 'space-between', mb: 2.5 }}>
         <TextField
-          placeholder="Search by customer name, code, or contact..."
+          placeholder="Search customer, code, or contact..."
           size="small"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{ width: { xs: '100%', md: 340 } }}
+          sx={{ flex: 1, minWidth: { xs: '100%', sm: 260 }, maxWidth: { md: 380 } }}
           slotProps={{
             input: {
               startAdornment: (
@@ -228,11 +238,11 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       </Stack>
 
       {/* MUI X DataGrid */}
-      <Box sx={{ height: 480, width: '100%' }}>
+      <Box sx={{ height: 530, width: '100%' }}>
         <DataGrid
           rows={filteredDebtors}
           columns={columns}
-          rowHeight={64}
+          rowHeight={72}
           pageSizeOptions={[5, 10, 25]}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
@@ -243,6 +253,24 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
             cursor: 'pointer',
             border: '1px solid #e5e7eb',
             borderRadius: 2,
+            '& .MuiDataGrid-cell': {
+              display: 'flex',
+              alignItems: 'center',
+              py: 0.5,
+            },
+            '& .MuiDataGrid-columnHeaders': {
+              backgroundColor: '#f9fafb',
+              borderBottom: '2px solid #e5e7eb',
+            },
+            '& .MuiDataGrid-columnHeaderTitle': {
+              fontWeight: 700,
+              fontSize: '0.825rem',
+            },
+            '& .MuiDataGrid-row': {
+              '&:hover': {
+                backgroundColor: '#f9fafb',
+              },
+            },
           }}
         />
       </Box>
