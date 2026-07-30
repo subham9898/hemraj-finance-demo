@@ -12,6 +12,8 @@ import {
   IconButton,
   Divider,
   Typography,
+  Stack,
+  Chip,
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -20,9 +22,10 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { useFinance } from '../../context/FinanceContext';
 
-const DRAWER_WIDTH = 240;
+const DRAWER_WIDTH = 250;
 const MINI_DRAWER_WIDTH = 68;
 
 interface SidebarProps {
@@ -97,23 +100,98 @@ export const Sidebar: React.FC<SidebarProps> = ({
           overflowX: 'hidden',
           backgroundColor: '#ffffff',
           borderRight: '1px solid #e5e7eb',
-          top: '64px',
-          height: 'calc(100vh - 64px)',
+          top: 0,
+          height: '100vh',
+          zIndex: (theme) => theme.zIndex.drawer,
         },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', p: 1.5 }}>
+      {/* Sidebar Top Header with Hemraj Finance Branding */}
+      <Box
+        sx={{
+          p: collapsed ? 1.5 : 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: collapsed ? 'center' : 'space-between',
+          minHeight: 64,
+          borderBottom: '1px solid #f1f5f9',
+        }}
+      >
+        <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center', overflow: 'hidden' }}>
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              minWidth: 36,
+              borderRadius: '8px',
+              backgroundColor: '#0f172a',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}
+          >
+            <AccountBalanceIcon sx={{ fontSize: 20 }} />
+          </Box>
+          {!collapsed && (
+            <Box sx={{ overflow: 'hidden' }}>
+              <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: 800,
+                    letterSpacing: '-0.02em',
+                    color: '#0f172a',
+                    fontSize: '0.95rem',
+                    lineHeight: 1.2,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  HEMRAJ FINANCE
+                </Typography>
+                <Chip
+                  label="INR"
+                  size="small"
+                  sx={{
+                    backgroundColor: '#f1f5f9',
+                    color: '#475569',
+                    fontWeight: 700,
+                    fontSize: '0.625rem',
+                    height: 18,
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '4px',
+                  }}
+                />
+              </Stack>
+              <Typography variant="caption" color="text.secondary" noWrap sx={{ fontSize: '0.7rem', display: 'block', mt: 0.1 }}>
+                Receivables Platform
+              </Typography>
+            </Box>
+          )}
+        </Stack>
+
         {!collapsed && (
-          <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 700, letterSpacing: '0.08em', ml: 1 }}>
+          <IconButton size="small" onClick={onToggleCollapse} sx={{ border: '1px solid #e5e7eb', ml: 1 }}>
+            <ChevronLeftIcon fontSize="small" />
+          </IconButton>
+        )}
+      </Box>
+
+      {collapsed && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 1 }}>
+          <IconButton size="small" onClick={onToggleCollapse} sx={{ border: '1px solid #e5e7eb' }}>
+            <ChevronRightIcon fontSize="small" />
+          </IconButton>
+        </Box>
+      )}
+
+      <Box sx={{ p: 1.5, pb: 0.5 }}>
+        {!collapsed && (
+          <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 700, letterSpacing: '0.08em', ml: 1, fontSize: '0.675rem' }}>
             MODULES
           </Typography>
         )}
-        <IconButton size="small" onClick={onToggleCollapse} sx={{ border: '1px solid #e5e7eb' }}>
-          {collapsed ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-        </IconButton>
       </Box>
-
-      <Divider sx={{ mb: 1, borderColor: '#f3f4f6' }} />
 
       <List sx={{ px: 1 }}>
         {navItems.map((item) => {
@@ -178,3 +256,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </Drawer>
   );
 };
+

@@ -72,29 +72,35 @@ function AppContent() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
-      {/* Top Header */}
-      <Header />
+    <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+      {/* Sidebar Navigation */}
+      <Sidebar
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+      />
 
-      {/* Body: Sidebar + Main Content */}
-      <Box sx={{ display: 'flex', flexGrow: 1, position: 'relative' }}>
-        <Sidebar
-          activeTab={activeTab}
-          onSelectTab={setActiveTab}
-          collapsed={sidebarCollapsed}
-          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-        />
+      {/* Main Content Workspace Container */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          minWidth: 0,
+          backgroundColor: '#f8f9fa',
+          minHeight: '100vh',
+        }}
+      >
+        {/* Top Utility Bar (Filter, Notifications, Live Sync, Reset) */}
+        <Header />
 
-        {/* Main Content Workspace */}
+        {/* Workspace Active View */}
         <Box
           component="main"
           sx={{
             flexGrow: 1,
             p: { xs: 2, sm: 3, md: 4 },
-            width: { sm: `calc(100% - ${sidebarCollapsed ? 68 : 240}px)` },
-            transition: 'width 0.2s ease',
-            backgroundColor: '#f8f9fa',
-            minHeight: 'calc(100vh - 64px)',
           }}
         >
           {renderActiveModule()}
