@@ -69,59 +69,63 @@ export const Header: React.FC = () => {
         <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
           <Box
             sx={{
-              width: 38,
-              height: 38,
-              borderRadius: 1.5,
-              backgroundColor: '#dc2626',
+              width: 36,
+              height: 36,
+              borderRadius: '8px',
+              backgroundColor: '#0f172a',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#ffffff',
             }}
           >
-            <AccountBalanceIcon fontSize="small" />
+            <AccountBalanceIcon sx={{ fontSize: 20 }} />
           </Box>
           <Box>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 700, letterSpacing: '-0.02em', color: '#111827' }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, letterSpacing: '-0.02em', color: '#0f172a', fontSize: '1.05rem' }}>
                 HEMRAJ FINANCE
               </Typography>
               <Chip
-                label="₹ INR"
+                label="INR (₹)"
                 size="small"
-                icon={<CurrencyRupeeIcon style={{ fontSize: 13, color: '#dc2626' }} />}
                 sx={{
-                  backgroundColor: '#fef2f2',
-                  color: '#dc2626',
-                  fontWeight: 700,
-                  fontSize: '0.7rem',
+                  backgroundColor: '#f1f5f9',
+                  color: '#475569',
+                  fontWeight: 600,
+                  fontSize: '0.675rem',
                   height: 20,
-                  border: '1px solid #fecaca',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '4px',
                 }}
               />
             </Stack>
-            <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
-              Enterprise Cash Flow & Receivables Automation Platform
+            <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' }, fontSize: '0.725rem' }}>
+              Cash Flow & Receivables Automation Platform
             </Typography>
           </Box>
         </Stack>
 
         {/* Live Status & Quick Actions */}
-        <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+        <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
           {/* Status Indicator */}
-          <Chip
-            icon={<CheckCircleIcon style={{ fontSize: 14, color: '#16a34a' }} />}
-            label="Live Sync"
-            size="small"
+          <Box
             sx={{
-              backgroundColor: '#f0fdf4',
-              color: '#166534',
-              border: '1px solid #bbf7d0',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              display: { xs: 'none', md: 'inline-flex' },
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              gap: 0.75,
+              px: 1.2,
+              py: 0.4,
+              borderRadius: '9999px',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
             }}
-          />
+          >
+            <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#10b981' }} />
+            <Typography variant="caption" sx={{ color: '#334155', fontWeight: 600, fontSize: '0.725rem' }}>
+              Live Sync
+            </Typography>
+          </Box>
 
           {/* Date Filter Button */}
           <Button

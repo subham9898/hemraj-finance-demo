@@ -153,15 +153,28 @@ export const DebtorsGrid: React.FC<DebtorsGridProps> = ({ onSelectDebtor, onDraf
       renderCell: (params) => (
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
           <Button
-            variant="contained"
-            color="primary"
+            variant="outlined"
             size="small"
-            startIcon={<AutoAwesomeIcon style={{ fontSize: 13 }} />}
+            startIcon={<AutoAwesomeIcon style={{ fontSize: 13, color: '#0f172a' }} />}
             onClick={(e) => {
               e.stopPropagation();
               onDraftEmail(params.row);
             }}
-            sx={{ fontSize: '0.72rem', py: 0.5, px: 1.2, textTransform: 'none', whiteSpace: 'nowrap' }}
+            sx={{
+              fontSize: '0.725rem',
+              fontWeight: 600,
+              py: 0.4,
+              px: 1.2,
+              textTransform: 'none',
+              whiteSpace: 'nowrap',
+              borderColor: '#cbd5e1',
+              color: '#0f172a',
+              backgroundColor: '#ffffff',
+              '&:hover': {
+                borderColor: '#0f172a',
+                backgroundColor: '#f8fafc',
+              },
+            }}
           >
             Draft AI Email
           </Button>

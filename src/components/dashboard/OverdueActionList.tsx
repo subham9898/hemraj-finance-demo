@@ -41,29 +41,30 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
     .sort((a, b) => b.totalOutstanding - a.totalOutstanding);
 
   return (
-    <Card variant="outlined">
+    <Card elevation={0} sx={{ border: '1px solid #e2e8f0', borderRadius: '10px' }}>
       <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+          <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
             <Box
               sx={{
                 width: 28,
                 height: 28,
-                borderRadius: '50%',
-                backgroundColor: '#fef2f2',
-                color: '#dc2626',
+                borderRadius: '6px',
+                backgroundColor: '#f8fafc',
+                border: '1px solid #f1f5f9',
+                color: '#0f172a',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <PriorityHighIcon style={{ fontSize: 18 }} />
+              <PriorityHighIcon style={{ fontSize: 16 }} />
             </Box>
-            <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1rem', color: '#0f172a' }}>
               High-Priority Receivables & Overdue Action Queue
             </Typography>
           </Stack>
-          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500 }}>
+          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.75rem' }}>
             {highPriorityDebtors.length} accounts require action
           </Typography>
         </Stack>
@@ -71,13 +72,13 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
         <TableContainer>
           <Table size="small">
             <TableHead>
-              <TableRow sx={{ backgroundColor: '#f9fafb' }}>
-                <TableCell sx={{ fontWeight: 600, py: 1.5 }}>Debtor / Customer</TableCell>
-                <TableCell sx={{ fontWeight: 600, py: 1.5 }}>Region</TableCell>
-                <TableCell sx={{ fontWeight: 600, py: 1.5 }}>Total Overdue</TableCell>
-                <TableCell sx={{ fontWeight: 600, py: 1.5 }}>Max Overdue</TableCell>
-                <TableCell sx={{ fontWeight: 600, py: 1.5 }}>Risk Status</TableCell>
-                <TableCell align="right" sx={{ fontWeight: 600, py: 1.5 }}>
+              <TableRow sx={{ backgroundColor: '#f8fafc' }}>
+                <TableCell sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>Debtor / Customer</TableCell>
+                <TableCell sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>Region</TableCell>
+                <TableCell sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>Total Overdue</TableCell>
+                <TableCell sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>Max Overdue</TableCell>
+                <TableCell sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>Risk Status</TableCell>
+                <TableCell align="right" sx={{ fontWeight: 600, py: 1.25, fontSize: '0.775rem', color: '#475569' }}>
                   Actions
                 </TableCell>
               </TableRow>
@@ -92,15 +93,15 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
                 return (
                   <TableRow key={debtor.id} hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                     <TableCell>
-                      <Typography variant="body2" color="text.primary" sx={{ fontWeight: 600 }}>
+                      <Typography variant="body2" color="text.primary" sx={{ fontWeight: 600, fontSize: '0.85rem' }}>
                         {debtor.name}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.725rem' }}>
                         {debtor.contactName}
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.825rem' }}>
                         {debtor.region}
                       </Typography>
                     </TableCell>
@@ -111,15 +112,16 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
                     </TableCell>
                     <TableCell>
                       <Chip
-                        label={`${maxDaysOverdue} days late`}
+                        label={`${maxDaysOverdue}d late`}
                         size="small"
                         sx={{
-                          height: 22,
+                          height: 20,
                           fontSize: '0.7rem',
                           fontWeight: 600,
-                          backgroundColor: maxDaysOverdue > 40 ? '#fef2f2' : '#fff7ed',
-                          color: maxDaysOverdue > 40 ? '#dc2626' : '#ea580c',
-                          border: `1px solid ${maxDaysOverdue > 40 ? '#fecaca' : '#ffedd5'}`,
+                          backgroundColor: maxDaysOverdue > 40 ? '#fef2f2' : '#f8fafc',
+                          color: maxDaysOverdue > 40 ? '#b91c1c' : '#475569',
+                          border: `1px solid ${maxDaysOverdue > 40 ? '#fee2e2' : '#e2e8f0'}`,
+                          borderRadius: '4px',
                         }}
                       />
                     </TableCell>
@@ -129,12 +131,20 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
                     <TableCell align="right">
                       <Stack direction="row" spacing={1} sx={{ justifyContent: 'flex-end' }}>
                         <Button
-                          variant="contained"
-                          color="primary"
+                          variant="outlined"
                           size="small"
-                          startIcon={<AutoAwesomeIcon style={{ fontSize: 14 }} />}
+                          startIcon={<AutoAwesomeIcon style={{ fontSize: 13, color: '#0f172a' }} />}
                           onClick={() => onDraftEmail(debtor)}
-                          sx={{ fontSize: '0.75rem', py: 0.5, px: 1.2 }}
+                          sx={{
+                            fontSize: '0.725rem',
+                            fontWeight: 600,
+                            py: 0.3,
+                            px: 1.2,
+                            textTransform: 'none',
+                            borderColor: '#cbd5e1',
+                            color: '#0f172a',
+                            '&:hover': { borderColor: '#0f172a', backgroundColor: '#f8fafc' },
+                          }}
                         >
                           Draft AI Email
                         </Button>
@@ -143,9 +153,9 @@ export const OverdueActionList: React.FC<OverdueActionListProps> = ({
                           <IconButton
                             size="small"
                             onClick={() => onViewDebtor(debtor.id)}
-                            sx={{ border: '1px solid #e5e7eb' }}
+                            sx={{ border: '1px solid #e2e8f0' }}
                           >
-                            <VisibilityIcon fontSize="small" />
+                            <VisibilityIcon style={{ fontSize: 16 }} />
                           </IconButton>
                         </Tooltip>
                       </Stack>

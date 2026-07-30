@@ -23,9 +23,7 @@ export const KpiCards: React.FC = () => {
       change: '+12.4%',
       isPositive: true,
       comparison: 'vs last month (₹1.65Cr)',
-      icon: <PriceCheckIcon sx={{ color: '#16a34a' }} />,
-      bgColor: '#f0fdf4',
-      borderColor: '#bbf7d0',
+      icon: <PriceCheckIcon sx={{ color: '#0f172a', fontSize: 20 }} />,
     },
     {
       title: 'Total Outflows (Current Month)',
@@ -34,9 +32,7 @@ export const KpiCards: React.FC = () => {
       change: '-4.2%',
       isPositive: true,
       comparison: 'vs last month (₹1.17Cr)',
-      icon: <MoneyOffIcon sx={{ color: '#0284c7' }} />,
-      bgColor: '#f0f9ff',
-      borderColor: '#bae6fd',
+      icon: <MoneyOffIcon sx={{ color: '#0f172a', fontSize: 20 }} />,
     },
     {
       title: 'Outstanding Debtors Balance',
@@ -45,9 +41,7 @@ export const KpiCards: React.FC = () => {
       change: '+8.1%',
       isPositive: false,
       comparison: '7 accounts overdue past 30d',
-      icon: <WarningAmberIcon sx={{ color: '#dc2626' }} />,
-      bgColor: '#fef2f2',
-      borderColor: '#fecaca',
+      icon: <WarningAmberIcon sx={{ color: '#0f172a', fontSize: 20 }} />,
     },
     {
       title: 'Net Cash Reserve Balance',
@@ -56,9 +50,7 @@ export const KpiCards: React.FC = () => {
       change: '+18.6%',
       isPositive: true,
       comparison: 'includes latest AI matches',
-      icon: <AccountBalanceWalletIcon sx={{ color: '#d32f2f' }} />,
-      bgColor: '#fff5f5',
-      borderColor: '#fed7d7',
+      icon: <AccountBalanceWalletIcon sx={{ color: '#0f172a', fontSize: 20 }} />,
     },
   ];
 
@@ -67,34 +59,36 @@ export const KpiCards: React.FC = () => {
       sx={{
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr)' },
-        gap: 2.5,
+        gap: 2,
       }}
     >
       {kpis.map((kpi, idx) => (
         <Card
           key={idx}
-          variant="outlined"
+          elevation={0}
           sx={{
             height: '100%',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '10px',
+            transition: 'border-color 0.2s ease',
             '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+              borderColor: '#cbd5e1',
             },
           }}
         >
           <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
-              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.825rem' }}>
                 {kpi.title}
               </Typography>
               <Box
                 sx={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 1.5,
-                  backgroundColor: kpi.bgColor,
-                  border: `1px solid ${kpi.borderColor}`,
+                  width: 32,
+                  height: 32,
+                  borderRadius: '6px',
+                  backgroundColor: '#f8fafc',
+                  border: '1px solid #f1f5f9',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -106,27 +100,32 @@ export const KpiCards: React.FC = () => {
 
             <Tooltip title={`Exact Amount: ${kpi.fullValue}`} placement="top" arrow>
               <Box>
-                <MonoText variant="h4" sx={{ fontWeight: 700, color: '#111827', mb: 1 }}>
+                <MonoText variant="h5" sx={{ fontWeight: 700, color: '#0f172a', mb: 1, letterSpacing: '-0.02em' }}>
                   {kpi.shortValue}
                 </MonoText>
               </Box>
             </Tooltip>
 
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-              <Chip
-                size="small"
-                icon={kpi.isPositive ? <TrendingUpIcon style={{ fontSize: 13 }} /> : <TrendingDownIcon style={{ fontSize: 13 }} />}
-                label={kpi.change}
+              <Typography
+                variant="caption"
                 sx={{
-                  height: 20,
-                  fontSize: '0.7rem',
                   fontWeight: 700,
-                  backgroundColor: kpi.isPositive ? '#ecfdf5' : '#fef2f2',
-                  color: kpi.isPositive ? '#16a34a' : '#dc2626',
-                  border: `1px solid ${kpi.isPositive ? '#a7f3d0' : '#fecaca'}`,
+                  fontSize: '0.725rem',
+                  color: kpi.isPositive ? '#059669' : '#dc2626',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 0.25,
                 }}
-              />
-              <Typography variant="caption" color="text.secondary" noWrap sx={{ fontSize: '0.75rem' }}>
+              >
+                {kpi.isPositive ? (
+                  <TrendingUpIcon style={{ fontSize: 13 }} />
+                ) : (
+                  <TrendingDownIcon style={{ fontSize: 13 }} />
+                )}
+                {kpi.change}
+              </Typography>
+              <Typography variant="caption" color="text.secondary" noWrap sx={{ fontSize: '0.725rem' }}>
                 {kpi.comparison}
               </Typography>
             </Stack>

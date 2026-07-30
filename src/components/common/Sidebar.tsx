@@ -125,31 +125,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   selected={isActive}
                   onClick={() => onSelectTab(item.id)}
                   sx={{
-                    minHeight: 44,
+                    minHeight: 42,
                     justifyContent: collapsed ? 'center' : 'initial',
-                    px: collapsed ? 1.5 : 2,
-                    borderRadius: '8px',
-                    backgroundColor: isActive ? '#fef2f2' : 'transparent',
-                    color: isActive ? '#dc2626' : '#374151',
+                    px: collapsed ? 1.5 : 1.75,
+                    borderRadius: '6px',
+                    backgroundColor: isActive ? '#f1f5f9' : 'transparent',
+                    color: isActive ? '#0f172a' : '#475569',
                     '&.Mui-selected': {
-                      backgroundColor: '#fef2f2',
-                      color: '#dc2626',
-                      fontWeight: 700,
+                      backgroundColor: '#f1f5f9',
+                      color: '#0f172a',
+                      fontWeight: 600,
                       '&:hover': {
-                        backgroundColor: '#fee2e2',
+                        backgroundColor: '#e2e8f0',
                       },
                     },
                     '&:hover': {
-                      backgroundColor: isActive ? '#fee2e2' : '#f9fafb',
+                      backgroundColor: isActive ? '#e2e8f0' : '#f8fafc',
                     },
                   }}
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
-                      mr: collapsed ? 0 : 2,
+                      mr: collapsed ? 0 : 1.75,
                       justifyContent: 'center',
-                      color: isActive ? '#dc2626' : '#6b7280',
+                      color: isActive ? '#0f172a' : '#64748b',
                     }}
                   >
                     {item.badge ? (
