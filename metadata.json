@@ -1,0 +1,6 @@
+{
+  "name": "HEMRAJ FINANCE",
+  "description": "Enterprise Cash Flow & Receivables Platform for automated cash flow tracking, debtor management, AI bank reconciliation, and CFO briefings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
